@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .contenedor {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        text-align: center;
+      }
+
+      input {
+        width: 90%;
+        padding: 8px;
+        margin: 5px 0 15px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <h2>Ingreso de datos</h2>
+
+      <input type="text" id="nombre" placeholder="Nombre" />
+      <input type="number" id="edad" placeholder="Edad" />
+      <input type="number" id="nota" placeholder="Nota" />
+
+      <button onclick="cargar()">Cargar</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody id="tablaDatos"></tbody>
+      </table>
+    </div>
+
+    <script>
+      // CARGAR DATOS AL INICIAR LA PAGINA
+      window.onload = function () {
+        let datosGuardados = JSON.parse(localStorage.getItem("alumnos")) || [];
+        datosGuardados.forEach((a) => agregarFila(a));
+      };
+
+      function cargar() {
+        let nombre = document.getElementById("nombre").value;
+        let edad = document.getElementById("edad").value;
+        let nota = document.getElementById("nota").value;
+
+        let alumno = {
+          nombre: nombre,
+          edad: edad,
+          nota: nota,
+        };
+
+        // guardar en localStorage
+        let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+        alumnos.push(alumno);
+        localStorage.setItem("alumnos", JSON.stringify(alumnos));
+
+        agregarFila(alumno);
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("edad").value = "";
+        document.getElementById("nota").value = "";
+      }
+
+      function agregarFila(alumno) {
+        let fila =
+          "<tr><td>" +
+          alumno.nombre +
+          "</td><td>" +
+          alumno.edad +
+          "</td><td>" +
+          alumno.nota +
+          "</td></tr>";
+        document.getElementById("tablaDatos").innerHTML += fila;
+      }
+    </script>
+  </body>
+</html>
