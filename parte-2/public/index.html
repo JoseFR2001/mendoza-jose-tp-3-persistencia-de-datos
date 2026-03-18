@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alumnos</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .contenedor {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        text-align: center;
+      }
+
+      input {
+        width: 90%;
+        padding: 8px;
+        margin: 5px 0 15px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <h2>Ingreso de datos</h2>
+
+      <form action="/alumno" method="post">
+        <input type="text" name="nombre" placeholder="Nombre" required />
+        <input type="number" name="edad" placeholder="Edad" required />
+        <input type="number" name="nota" placeholder="Nota" required />
+
+        <button>Cargar</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+    </div>
+
+    <script>
+      fetch("/datos")
+        .then((r) => r.json())
+        .then((data) => {
+          let html = "";
+
+          data.forEach((a) => {
+            html += `
+      <tr>
+        <td>${a.nombre}</td>
+        <td>${a.edad}</td>
+        <td>${a.nota}</td>
+      </tr>
+    `;
+          });
+
+          document.getElementById("tabla").innerHTML = html;
+        });
+    </script>
+  </body>
+</html>

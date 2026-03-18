@@ -1,0 +1,25 @@
+{
+  "name": "mendoza-jose-tp-3-persistencia-de-datos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseFR2001/mendoza-jose-tp-3-persistencia-de-datos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/JoseFR2001/mendoza-jose-tp-3-persistencia-de-datos/issues"
+  },
+  "homepage": "https://github.com/JoseFR2001/mendoza-jose-tp-3-persistencia-de-datos#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-session": "^1.19.0"
+  }
+}
